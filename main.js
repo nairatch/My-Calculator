@@ -4,7 +4,10 @@ let resultDisplayed = false;
 
 function appendValue(value) {
     if (resultDisplayed) {
-        currentInput = '';
+        // Clear the current input only if a number is entered
+        if (!isNaN(value) || value === '.') {
+            currentInput = '';
+        }
         resultDisplayed = false;
     }
 
