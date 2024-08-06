@@ -4,7 +4,6 @@ let resultDisplayed = false;
 
 function appendValue(value) {
     if (resultDisplayed) {
-        // Clear the current input only if a number is entered
         if (!isNaN(value) || value === '.') {
             currentInput = '';
         }
@@ -13,7 +12,6 @@ function appendValue(value) {
 
     if (value === '.' && currentInput.includes('.')) return;
 
-    // Prevent multiple operators in a row
     const operators = ['+', '-', '*', '/', '**', '%'];
     if (operators.includes(value)) {
         if (currentInput === '' || operators.includes(currentInput.slice(-1))) return;
@@ -30,16 +28,12 @@ function clearDisplay() {
 
 function calculate() {
     try {
-        // Replace display-friendly operators with eval-compatible ones
         let expression = currentInput.replace(/÷/g, '/').replace(/×/g, '*').replace(/\^/g, '**');
 
-        // Handle percentage calculation
         expression = expression.replace(/(\d+)\s*%/g, '($1 / 100)');
 
-        // Evaluate the expression
         const result = eval(expression);
 
-        // Display result and set flag
         display.textContent = result;
         currentInput = result.toString();
         resultDisplayed = true;
